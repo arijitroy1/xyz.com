@@ -1,0 +1,42 @@
+body{
+	background-color:rgb(255,255,255);
+}
+
+.bd{
+	width:785px; 
+	margin-left:auto;
+	margin-right:auto;
+	text-align:left;
+	font: 15px "Calibri",Georgia,serif;
+}
+
+img{
+	border: 0px;
+}
+
+.loginc{
+	float: right;
+	z-index:9999;
+	font: normal 11px Tahoma, Arial, Helvetica, sans-serif;
+}
+
+div.loginc a{
+	text-decoration:none; 
+	color:blue;
+}
+
+h2{
+	color: rgb(0,68,98);
+}
+
+div.bbd table{
+	width: 700px;
+	border-color: black;
+	border-spacing: 0px;
+    	border-width: 0px 0px 0px 0px;
+}
+
+div.bbd table th{
+	background-color: rgb(180,180,180);
+	height: 30px;
+}

@@ -1,0 +1,15 @@
+customer{email is the primary key} email, name, pwd defines email address, customer name, password corrospondingly.
+
+
+order{no primary key}oid= Order ID, pid= Ordered Product ID, qty= Ordered Product Quantity, discount= Discount on the Ordered Product, price= Total Price corrosponding to each item 
+
+
+
+
+orderdeliverydtls{oid is primary key} oid= Order ID, dt=Ordered date, address=Delivery Address,
+email=email address, mobile=customer's mobile number, status=present status of the order.
+
+
+
+
+product{pid is the primary key}pid=product ID, pname=product name, pic=picture of the product, rs, price of the product, discount= Discount on the Product, qtyh=quantity on hand, info= info related to the product, manufacturer= manufacturer of the product, type=type of the product, rating= star rating for the product, home_pg_show=Whether this product is to be shown on the home page or not(maximum 4 product can be shown on the home page under each category.)

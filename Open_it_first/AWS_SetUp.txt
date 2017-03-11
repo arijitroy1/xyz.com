@@ -1,0 +1,72 @@
+1. Separate Security Group needed to be created
+Commands -
+
+-> sudo yum update -y
+-> Check for the available version of the packages -
+
+[ec2-user@ip-172-31-79-232 ~]$ sudo yum list mysql-server
+Loaded plugins: priorities, update-motd, upgrade-helper
+Available Packages
+mysql-server.noarch                   5.5-1.6.amzn1                    amzn-main
+[ec2-user@ip-172-31-79-232 ~]$ sudo yum list mod_ssl
+Loaded plugins: priorities, update-motd, upgrade-helper
+Available Packages
+mod_ssl.x86_64                   1:2.2.31-1.8.amzn1                    amzn-main
+[ec2-user@ip-172-31-79-232 ~]$ yum list httpd
+Loaded plugins: priorities, update-motd, upgrade-helper
+Available Packages
+httpd.x86_64                     2.2.31-1.8.amzn1                      amzn-main
+[ec2-user@ip-172-31-79-232 ~]$ yum list php
+Loaded plugins: priorities, update-motd, upgrade-helper
+Available Packages
+php.x86_64                      5.3.29-1.8.amzn1                       amzn-main
+[ec2-user@ip-172-31-79-232 ~]$ yum list mysql
+Loaded plugins: priorities, update-motd, upgrade-helper
+Available Packages
+mysql.noarch                       5.5-1.6.amzn1                       amzn-main
+[ec2-user@ip-172-31-79-232 ~]$ yum list php-mysqlnd
+Loaded plugins: priorities, update-motd, upgrade-helper
+Available Packages
+php-mysqlnd.x86_64                  5.3.29-1.8.amzn1                   amzn-main
+
+-> sudo yum install -y httpd php mysql php-mysqlnd 
+-> sudo service httpd start
+-> Check if the page is coming or not by hittting the DNS name at the browser
+-> sudo groupadd www
+-> sudo usermod -a -G www ec2-user
+-> Exit the session and start a new one
+-> sudo chown -R root:www /var/www
+-> sudo chmod 2775 /var/www
+-> find /var/www -type d -exec sudo chmod 2775 {} \;
+-> find /var/www -type f -exec sudo chmod 0664 {} \;
+-> sudo yum list mod_ssl
+-> sudo service httpd restart
+-> echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php
+-> sudo yum install -y mysql-server
+-> sudo service mysqld start
+-> sudo mysql_secure_installation
+Enter the current root password. By default, the root account does not have a password set, so press Enter.
+Type Y to set a password, and enter a secure password twice. For more information about creating a secure password, see http://www.pctools.com/guides/password/. Make sure to store this password in a safe place.
+
+Note
+Setting a root password for MySQL is only the most basic measure for securing your database. When you build or install a database-driven application, you typically create a database service user for that application and avoid using the root account for anything but database administration.
+Type Y to remove the anonymous user accounts.
+
+Type Y to disable remote root login.
+
+Type Y to remove the test database.
+
+Type Y to reload the privilege tables and save your changes.
+
+-> sudo service mysqld stop
+-> sudo chkconfig mysqld on
+-> sudo service mysqld start
+-> sudo yum-config-manager --enable epel
+-> sudo yum install -y phpMyAdmin
+-> cp /etc/httpd/conf.d/phpMyAdmin.conf /var/tmp/
+-> sudo vi /etc/httpd/conf.d/phpMyAdmin.conf
+Changes are -
+1. Require ip *
+2. Deny from None
+3. Allow from All
+

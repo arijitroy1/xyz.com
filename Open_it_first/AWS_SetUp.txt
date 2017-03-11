@@ -69,4 +69,13 @@ Changes are -
 1. Require ip *
 2. Deny from None
 3. Allow from All
-
+==================================================================================
+-> mysql -u root -p
+-> create database xyz;
+-> show database;
+-> use xyz;
+-> CREATE TABLE customer ( email varchar(40), name longtext, pwd varchar(30), PRIMARY KEY (email) );
+-> CREATE TABLE `order` ( oid bigint(10), pid bigint(10), qty int(3), discount int(3), price bigint(6) );
+-> CREATE TABLE orderdeliverydtls ( oid bigint(10), dt datetime, address longtext, email varchar(100), mobile bigint(10), status varchar(50) default 'Under Process' );
+-> CREATE TABLE product ( pid bigint(10), pname varchar(50) default 'Unknown Name', pic varchar(100) default "pics/photo_not_available.jpg", rs int(6) default 0, discount int(3) default 0, qtyh bigint(5) default 0, info varchar(500) default 'None', manufacturer varchar(100) default 'Unknown Manufacturer', type varchar(100) default 'Unknown Type', rating int(4) default 0, home_pg_show varchar(3) default 'no', primary key(pid) );
+-> alter table orderdeliverydtls add primary key(oid);

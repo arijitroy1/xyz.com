@@ -29,7 +29,7 @@ Loaded plugins: priorities, update-motd, upgrade-helper
 Available Packages
 php-mysqlnd.x86_64                  5.3.29-1.8.amzn1                   amzn-main
 
--> sudo yum install -y httpd php mysql php-mysqlnd 
+-> sudo yum install -y httpd php mysql php-mysqlnd mod_ssl
 -> sudo service httpd start
 -> Check if the page is coming or not by hittting the DNS name at the browser
 -> sudo groupadd www
@@ -79,3 +79,30 @@ Changes are -
 -> CREATE TABLE orderdeliverydtls ( oid bigint(10), dt datetime, address longtext, email varchar(100), mobile bigint(10), status varchar(50) default 'Under Process' );
 -> CREATE TABLE product ( pid bigint(10), pname varchar(50) default 'Unknown Name', pic varchar(100) default "pics/photo_not_available.jpg", rs int(6) default 0, discount int(3) default 0, qtyh bigint(5) default 0, info varchar(500) default 'None', manufacturer varchar(100) default 'Unknown Manufacturer', type varchar(100) default 'Unknown Type', rating int(4) default 0, home_pg_show varchar(3) default 'no', primary key(pid) );
 -> alter table orderdeliverydtls add primary key(oid);
+
+
+===================================================================================
+1. Created a new EC2 instance and Used the same security group as the previous one
+
+-> sudo yum install -y docker
+-> sudo service docker start
+-> sudo usermod -a -G docker ec2-user
+-> Log out and log back in again to pick up the new docker group permissions.
+-> docker info
+-> sudo yum install -y git
+-> git clone https://github.com/awslabs/ecs-demo-php-simple-app
+-> cd ecs-demo-php-simple-app
+-> docker build -t arijitroy1/amazon-ecs-sample .
+-> docker run -p 80:80 arijitroy1/amazon-ecs-sample &
+-> docker commit b4daee418996 arijitroy1/amazon-ecs-sample
+-> docker stop b4daee418996
+-> docker login
+-> docker push arijitroy1/amazon-ecs-sample
+====================================================================================
+
+-> docker ps (For checking the running containers)
+-> docker exec -it b4daee418996 bash (To go inside a docker image)
+-> dpkg -l (To lisst down all the sw installed innside a Docker image)
+-> docker stop b4daee418996 (To stop a docker container)
+-> apt-get install vim
+-> docker commit c1c8940c454e arijitroy1/amazon-ecs-sample
